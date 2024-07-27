@@ -1,14 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server:{
+  server: {
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',}
-    }
-  }
-})
+        target: 'https://lets-chat-gpsy.onrender.com',
+      },
+    },
+  },
+});
