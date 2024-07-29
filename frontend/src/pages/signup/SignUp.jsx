@@ -23,85 +23,48 @@ const SignUp = () => {
 		await signup(inputs);
 	};
 
-	return (
-		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
-			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-				<h1 className='text-3xl font-semibold text-center text-gray-300'>
-					Sign Up <span className='text-red-500'> ShortCake😉</span>
-				</h1>
+    return (
+        <div className='flex flex-col items-center justify-center w-full max-w-md mx-auto p-4'>
+            <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+                <h1 className='text-2xl sm:text-3xl font-semibold text-center text-gray-300'>
+                    Sign Up <span className='text-red-500'> ShortCake😉</span>
+                </h1>
 
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label className='label p-2'>
-							<span className='text-base label-text'>Full Name</span>
-						</label>
-						<input
-							type='text'
-							placeholder='Sweet name '
-							className='w-full input input-bordered  h-10'
-							value={inputs.fullName}
-							onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
-						/>
-					</div>
+                <form onSubmit={handleSubmit} className="mt-4">
+                    {['fullName', 'username', 'password', 'confirmPassword'].map((field) => (
+                        <div key={field} className="mb-4">
+                            <label className='block text-sm font-medium text-gray-300 mb-1' htmlFor={field}>
+                                {field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1').trim()}
+                            </label>
+                            <input
+                                id={field}
+                                type={field.includes('password') ? 'password' : 'text'}
+                                placeholder={`Enter ${field.replace(/([A-Z])/g, ' $1').trim().toLowerCase()}`}
+                                className='w-full px-3 py-2 rounded-md'
+                                value={inputs[field]}
+                                onChange={(e) => setInputs({ ...inputs, [field]: e.target.value })}
+                            />
+                        </div>
+                    ))}
 
-					<div>
-						<label className='label p-2 '>
-							<span className='text-base label-text'>Username</span>
-						</label>
-						<input
-							type='text'
-							placeholder='username'
-							className='w-full input input-bordered h-10'
-							value={inputs.username}
-							onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
-						/>
-					</div>
+                    <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
 
-					<div>
-						<label className='label'>
-							<span className='text-base label-text'>Password</span>
-						</label>
-						<input
-							type='password'
-							placeholder='Enter Password'
-							className='w-full input input-bordered h-10'
-							value={inputs.password}
-							onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
-						/>
-					</div>
+                    <Link
+                        to={"/login"}
+                        className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'
+                    >
+                        Already have an account?
+                    </Link>
 
-					<div>
-						<label className='label'>
-							<span className='text-base label-text'>Confirm Password</span>
-						</label>
-						<input
-							type='password'
-							placeholder='Confirm Password'
-							className='w-full input input-bordered h-10'
-							value={inputs.confirmPassword}
-							onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
-						/>
-					</div>
-
-					<GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
-
-					<Link
-						to={"/login"}
-						className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'
-						href='#'
-					>
-						Already have an account?
-					</Link>
-
-					<div>
-						<button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={loading}>
-							{loading ? <span className='loading loading-spinner'></span> : "Sign Up"}
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	);
+                    <div className="mt-6">
+                        <button className='w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition duration-300' disabled={loading}>
+                            {loading ? <span className='loading loading-spinner'></span> : "Sign Up"}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 };
 export default SignUp;
 
