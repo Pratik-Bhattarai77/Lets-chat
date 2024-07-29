@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
@@ -13,53 +14,56 @@ const Login = () => {
 		await login(username, password);
 	};
 
-	return (
-		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
-			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-				<h1 className='text-3xl font-semibold text-center text-gray-300'>
-					Login
-					<span className='text-red-500'> ShortCake😘</span>
-				</h1>
+    return (
+        <div className='flex flex-col items-center justify-center w-full max-w-md mx-auto p-4'>
+            <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+                <h1 className='text-2xl sm:text-3xl font-semibold text-center text-gray-300'>
+                    Login
+                    <span className='text-red-500'> ShortCake😘</span>
+                </h1>
 
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label className='label p-2'>
-							<span className='text-base label-text'>Username</span>
-						</label>
-						<input
-							type='text'
-							placeholder='Enter username'
-							className='w-full input input-bordered h-10'
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
-						/>
-					</div>
+                <form onSubmit={handleSubmit} className="mt-4">
+                    <div className="mb-4">
+                        <label className='block text-sm font-medium text-gray-300 mb-1' htmlFor="username">
+                            Username
+                        </label>
+                        <input
+                            id="username"
+                            type='text'
+                            placeholder='Enter username'
+                            className='w-full px-3 py-2 rounded-md'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
 
-					<div>
-						<label className='label'>
-							<span className='text-base label-text'>Password</span>
-						</label>
-						<input
-							type='password'
-							placeholder='Enter Password'
-							className='w-full input input-bordered h-10'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</div>
-					<Link to='/signup' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
-						{"Don't"} have an account?
-					</Link>
+                    <div className="mb-4">
+                        <label className='block text-sm font-medium text-gray-300 mb-1' htmlFor="password">
+                            Password
+                        </label>
+                        <input
+                            id="password"
+                            type='password'
+                            placeholder='Enter Password'
+                            className='w-full px-3 py-2 rounded-md'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <Link to='/signup' className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'>
+                        {"Don't"} have an account?
+                    </Link>
 
-					<div>
-						<button className='btn btn-block btn-sm mt-2' disabled={loading}>
-							{loading ? <span className='loading loading-spinner '></span> : "Login"}
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	);
+					<div className="mt-6">
+  							  <button className='w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition duration-300 mt-2' disabled={loading}>
+   							     {loading ? <span className='loading loading-spinner'></span> : "Login"}
+ 						   </button>
+						</div>
+
+                </form>
+            </div>
+        </div>
+    );
 };
 export default Login;
 
